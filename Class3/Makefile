@@ -38,4 +38,4 @@ cali-destroy:
 	terraform workspace new cali || terraform workspace select cali
 	terraform init
 	terraform destroy -var-file cali.tfvars --auto-approve
-apply-all: virginia-destroy ohio-destroy oregon-destroy cali-destroy
+destroy-all: virginia-destroy ohio-destroy oregon-destroy cali-destroy
