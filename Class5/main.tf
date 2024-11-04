@@ -10,7 +10,6 @@ data "aws_ami" "ubuntu" {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-
   owners = ["099720109477"] # Canonical
 }
 
@@ -64,10 +63,8 @@ resource "aws_security_group" "allow_tls" {
     to_port          = 0
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
+} 
 }
-  tags = local.common_tag
-}
-
 
 resource "null_resource" "cluster" {
  
@@ -79,7 +76,7 @@ resource "null_resource" "cluster" {
     host = element(aws_instance.web[*].public_ip, 0)
     type = "ssh"
     user = "ubuntu"
-    private_key = file("~/.ssh/id_rsa") # ssh ubuntu
+    private_key = file("~/.ssh/id_rsa") # ssh ubuntu@IP
   }
 
   provisioner "remote-exec" {
